@@ -6,6 +6,7 @@
 # GLM-5.3-Flash. Der Schluessel kommt aus der Benutzervariable ZAI_API_KEY (einmalig per
 # setx gesetzt), nie aus einer Datei. Alle Variablen gelten nur fuer diesen Aufruf.
 # claude und claude-u bleiben unveraendert; claude-glm = Hauptprofil, claude-u-glm = Uni-Profil.
+# --mt als erstes Argument startet im Onsite.ai-OS-Maintainer-Modus.
 
 $script:ClaudeGlmMain    = "glm-5.3[1m]"
 $script:ClaudeGlmFlash   = "glm-5.3-flash[1m]"
@@ -13,6 +14,10 @@ $script:ClaudeGlmBaseUrl = "https://api.z.ai/api/anthropic"
 
 function Invoke-ClaudeGlm {
   param([string[]]$ClaudeArgs)
+  # --mt (nur als erstes Argument): Maintainer-Modus des Onsite.ai-OS wie claude-m
+  if ($ClaudeArgs -and $ClaudeArgs[0] -eq '--mt') {
+    $ClaudeArgs = @('--settings', "$env:USERPROFILE\.claude\oai\maintainer.json") + @($ClaudeArgs | Select-Object -Skip 1)
+  }
   if (-not $env:ZAI_API_KEY) {
     Write-Error "ZAI_API_KEY fehlt. Einmalig setzen: setx ZAI_API_KEY <schluessel>, danach neue Shell."
     return

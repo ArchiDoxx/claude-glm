@@ -8,6 +8,7 @@ eine zweite Option daneben.
 |----------------|----------------------------|---------------|----------------------|
 | `claude-glm`   | Hauptprofil `~/.claude`    | `glm-5.3[1m]` | `glm-5.3-flash[1m]`  |
 | `claude-u-glm` | Uni-Profil `~/.claude-uni` | `glm-5.3[1m]` | `glm-5.3-flash[1m]`  |
+| `claude-glm --mt` | Hauptprofil im Onsite.ai-OS-Maintainer-Modus (identisch zu `claude-m`) | `glm-5.3[1m]` | `glm-5.3-flash[1m]` |
 
 Modell-Slots: Opus und Sonnet auf `glm-5.3[1m]`, Haiku auf `glm-5.3-flash[1m]`. Ein Subagent
 ohne Modellangabe oder mit `haiku` läuft also auf Flash, mit `sonnet` oder `opus` auf dem
